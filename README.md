@@ -6,152 +6,6 @@
 
 ---
 
-## 🇻🇳 Tiếng Việt
-
-### Giới thiệu
-
-Macro VBA giúp bạn **chèn hàng loạt ảnh vào Excel** một cách tự động: đọc tên file từ một cột, tìm ảnh trong thư mục bạn chọn, rồi căn chỉnh ảnh gọn gàng vào từng ô — đúng tỉ lệ, căn giữa, không bị méo.
-
-Phù hợp cho: báo giá nội thất, danh mục sản phẩm, bảng kiểm kê hàng hóa, hồ sơ dự án xây dựng...
-
----
-
-### ✅ Tính năng
-
-- Chèn ảnh tự động theo tên file trong cột C (có thể thay đổi)
-- Hỗ trợ 14 định dạng: **PNG, JPG, JPEG, GIF, BMP, TIFF, WMF, EMF, WEBP, SVG, ICO, HEIC, HEIF**
-- Tự động căn chỉnh ảnh: **giữ tỉ lệ gốc**, căn giữa trong ô
-- Hộp thoại **chọn thư mục** — không cần sửa đường dẫn trong code
-- Xóa ảnh cũ trước khi chèn (tránh chồng ảnh)
-- Báo cáo các file không tìm thấy sau khi chạy xong
-- Giới hạn an toàn: tối đa 500 ảnh/lần chạy
-- Macro xóa ảnh hàng loạt kèm xác nhận
-
----
-
-### 🛡️ Bảo mật
-
-- **Chống path traversal**: tên file chứa `../`, `/`, `\` sẽ bị từ chối
-- Ảnh được **nhúng trực tiếp** vào file (không link ngoài) → an toàn khi gửi khách
-- Không ghi dữ liệu ra ngoài thư mục được chọn
-- Không dùng `Shell`, `WScript`, hay bất kỳ lệnh hệ thống nào
-
----
-
-### 📋 Yêu cầu
-
-| Yêu cầu | Chi tiết |
-|---|---|
-| Hệ điều hành | Windows 10/11 |
-| Phần mềm | Microsoft Excel 2016 trở lên |
-| Macro | Phải **bật Macro** trong Excel |
-| HEIC/HEIF | Cần cài [HEVC codec](https://apps.microsoft.com/store/detail/hevc-video-extensions/9NMZLZ57R3T7) từ Microsoft Store |
-
----
-
-### 📂 File `.bas` là gì? Mở bằng cách nào?
-
-File `.bas` là file mã nguồn VBA (Visual Basic for Applications) — **không chạy trực tiếp được**, phải import vào Excel trước.
-
-#### Cách import vào Excel:
-
-**Cách 1 — Import file (nhanh nhất):**
-1. Mở file Excel của bạn
-2. Nhấn `Alt + F11` → mở Visual Basic Editor
-3. Vào menu **File → Import File...**
-4. Chọn file `.bas` vừa tải về → nhấn **Open**
-5. Lưu file Excel dưới dạng **`.xlsm`** (Excel Macro-Enabled Workbook)
-
-**Cách 2 — Copy thủ công:**
-1. Mở file `.bas` bằng **Notepad** (click phải → Open with → Notepad)
-2. Nhấn `Ctrl + A` → `Ctrl + C` để copy toàn bộ
-3. Mở Excel → nhấn `Alt + F11`
-4. Vào menu **Insert → Module**
-5. Dán code vào (`Ctrl + V`)
-6. Lưu file Excel dưới dạng **`.xlsm`**
-
-> **Tại sao dùng `.bas` thay vì `.xlsm`?**
-> File `.bas` chỉ chứa code thuần — nhẹ hơn, minh bạch hơn, dễ xem trên GitHub, và không bị phần mềm diệt virus cảnh báo như file `.xlsm`.
-
----
-
-### 🚀 Cách sử dụng
-
-#### Bước 1 — Chuẩn bị file Excel
-
-Tạo cột **C** chứa tên file ảnh (không cần đuôi file):
-
-| A | B | C |
-|---|---|---|
-| STT | Tên sản phẩm | **Ảnh** |
-| 1 | Bàn làm việc | `ban_lv_001` |
-| 2 | Ghế xoay | `ghe_xoay_02` |
-
-> **Lưu ý**: Tên file không được chứa ký tự `/`, `\`, hay `..`
-
-#### Bước 2 — Nhập macro vào Excel
-
-1. Mở file Excel
-2. Nhấn `Alt + F11` → mở Visual Basic Editor
-3. Vào menu **Insert → Module**
-4. Dán toàn bộ nội dung file `.bas` vào
-5. Nhấn `Ctrl + S` → lưu dưới dạng **xlsm** (Excel Macro-Enabled Workbook)
-
-#### Bước 3 — Chạy macro
-
-1. Nhấn `Alt + F8`
-2. Chọn `ChenAnhHangLoat` → nhấn **Run**
-3. Hộp thoại xuất hiện → chọn thư mục chứa ảnh
-4. Chờ macro chạy xong → xem thông báo kết quả
-
-#### Cách thay đổi cột ảnh
-
-Mở module VBA, tìm dòng:
-```vb
-Private Const COL_IMAGE As Integer = 3   ' Cột C
-```
-Đổi `3` thành số cột khác (D = 4, E = 5, ...).
-
----
-
-### ⚙️ Cấu hình nâng cao
-
-```vb
-Private Const COL_IMAGE     As Integer = 3    ' Cột chứa tên file ảnh
-Private Const START_ROW     As Long    = 2    ' Hàng bắt đầu (bỏ qua header)
-Private Const ROW_HEIGHT_PX As Double  = 80   ' Chiều cao hàng (points)
-Private Const IMG_PADDING   As Double  = 8    ' Khoảng trắng xung quanh ảnh
-Private Const MAX_SHAPES    As Long    = 500  ' Giới hạn số ảnh tối đa
-```
-
----
-
-### 📁 Cấu trúc dự án
-
-```
-excel-image-inserter/
-├── ChenAnhHangLoat_VI.bas   ← Phiên bản tiếng Việt
-├── InsertImagesBulk_EN.bas  ← Phiên bản tiếng Anh
-├── README.md                ← Hướng dẫn này
-└── LICENSE                  ← Giấy phép MIT
-```
-
----
-
-### ❓ Xử lý sự cố thường gặp
-
-| Vấn đề | Nguyên nhân | Giải pháp |
-|---|---|---|
-| Macro không chạy | Macro bị tắt | Vào File → Options → Trust Center → bật macro |
-| Không tìm thấy ảnh | Sai tên file hoặc sai thư mục | Kiểm tra tên file trong ô Excel khớp với tên file thực tế |
-| Lỗi HEIC/HEIF | Thiếu codec | Cài HEVC Video Extensions từ Microsoft Store |
-| SVG không hiện | Excel cũ | Cần Excel 2016+ |
-| File nặng bất thường | Quá nhiều ảnh lớn | Nén ảnh trước khi chèn, hoặc dùng JPG thay PNG |
-
----
-
----
-
 ## 🇬🇧 English
 
 ### Overview
@@ -302,4 +156,152 @@ MIT License — free to use, modify, and share. See [LICENSE](LICENSE) for detai
 
 ---
 
-*Made with ❤️ for the Vietnamese construction & furniture industry*
+---
+
+## 🇻🇳 Tiếng Việt
+
+### Giới thiệu
+
+Macro VBA giúp bạn **chèn hàng loạt ảnh vào Excel** một cách tự động: đọc tên file từ một cột, tìm ảnh trong thư mục bạn chọn, rồi căn chỉnh ảnh gọn gàng vào từng ô — đúng tỉ lệ, căn giữa, không bị méo.
+
+Phù hợp cho: báo giá nội thất, danh mục sản phẩm, bảng kiểm kê hàng hóa, hồ sơ dự án xây dựng...
+
+---
+
+### ✅ Tính năng
+
+- Chèn ảnh tự động theo tên file trong cột C (có thể thay đổi)
+- Hỗ trợ 14 định dạng: **PNG, JPG, JPEG, GIF, BMP, TIFF, WMF, EMF, WEBP, SVG, ICO, HEIC, HEIF**
+- Tự động căn chỉnh ảnh: **giữ tỉ lệ gốc**, căn giữa trong ô
+- Hộp thoại **chọn thư mục** — không cần sửa đường dẫn trong code
+- Xóa ảnh cũ trước khi chèn (tránh chồng ảnh)
+- Báo cáo các file không tìm thấy sau khi chạy xong
+- Giới hạn an toàn: tối đa 500 ảnh/lần chạy
+- Macro xóa ảnh hàng loạt kèm xác nhận
+
+---
+
+### 🛡️ Bảo mật
+
+- **Chống path traversal**: tên file chứa `../`, `/`, `\` sẽ bị từ chối
+- Ảnh được **nhúng trực tiếp** vào file (không link ngoài) → an toàn khi gửi khách
+- Không ghi dữ liệu ra ngoài thư mục được chọn
+- Không dùng `Shell`, `WScript`, hay bất kỳ lệnh hệ thống nào
+
+---
+
+### 📋 Yêu cầu
+
+| Yêu cầu | Chi tiết |
+|---|---|
+| Hệ điều hành | Windows 10/11 |
+| Phần mềm | Microsoft Excel 2016 trở lên |
+| Macro | Phải **bật Macro** trong Excel |
+| HEIC/HEIF | Cần cài [HEVC codec](https://apps.microsoft.com/store/detail/hevc-video-extensions/9NMZLZ57R3T7) từ Microsoft Store |
+
+---
+
+### 📂 File `.bas` là gì? Mở bằng cách nào?
+
+File `.bas` là file mã nguồn VBA (Visual Basic for Applications) — **không chạy trực tiếp được**, phải import vào Excel trước.
+
+#### Cách import vào Excel:
+
+**Cách 1 — Import file (nhanh nhất):**
+1. Mở file Excel của bạn
+2. Nhấn `Alt + F11` → mở Visual Basic Editor
+3. Vào menu **File → Import File...**
+4. Chọn file `.bas` vừa tải về → nhấn **Open**
+5. Lưu file Excel dưới dạng **`.xlsm`** (Excel Macro-Enabled Workbook)
+
+**Cách 2 — Copy thủ công:**
+1. Mở file `.bas` bằng **Notepad** (click phải → Open with → Notepad)
+2. Nhấn `Ctrl + A` → `Ctrl + C` để copy toàn bộ
+3. Mở Excel → nhấn `Alt + F11`
+4. Vào menu **Insert → Module**
+5. Dán code vào (`Ctrl + V`)
+6. Lưu file Excel dưới dạng **`.xlsm`**
+
+> **Tại sao dùng `.bas` thay vì `.xlsm`?**
+> File `.bas` chỉ chứa code thuần — nhẹ hơn, minh bạch hơn, dễ xem trên GitHub, và không bị phần mềm diệt virus cảnh báo như file `.xlsm`.
+
+---
+
+### 🚀 Cách sử dụng
+
+#### Bước 1 — Chuẩn bị file Excel
+
+Tạo cột **C** chứa tên file ảnh (không cần đuôi file):
+
+| A | B | C |
+|---|---|---|
+| STT | Tên sản phẩm | **Ảnh** |
+| 1 | Bàn làm việc | `ban_lv_001` |
+| 2 | Ghế xoay | `ghe_xoay_02` |
+
+> **Lưu ý**: Tên file không được chứa ký tự `/`, `\`, hay `..`
+
+#### Bước 2 — Nhập macro vào Excel
+
+1. Mở file Excel
+2. Nhấn `Alt + F11` → mở Visual Basic Editor
+3. Vào menu **Insert → Module**
+4. Dán toàn bộ nội dung file `.bas` vào
+5. Nhấn `Ctrl + S` → lưu dưới dạng **xlsm** (Excel Macro-Enabled Workbook)
+
+#### Bước 3 — Chạy macro
+
+1. Nhấn `Alt + F8`
+2. Chọn `ChenAnhHangLoat` → nhấn **Run**
+3. Hộp thoại xuất hiện → chọn thư mục chứa ảnh
+4. Chờ macro chạy xong → xem thông báo kết quả
+
+#### Cách thay đổi cột ảnh
+
+Mở module VBA, tìm dòng:
+```vb
+Private Const COL_IMAGE As Integer = 3   ' Cột C
+```
+Đổi `3` thành số cột khác (D = 4, E = 5, ...).
+
+---
+
+### ⚙️ Cấu hình nâng cao
+
+```vb
+Private Const COL_IMAGE     As Integer = 3    ' Cột chứa tên file ảnh
+Private Const START_ROW     As Long    = 2    ' Hàng bắt đầu (bỏ qua header)
+Private Const ROW_HEIGHT_PX As Double  = 80   ' Chiều cao hàng (points)
+Private Const IMG_PADDING   As Double  = 8    ' Khoảng trắng xung quanh ảnh
+Private Const MAX_SHAPES    As Long    = 500  ' Giới hạn số ảnh tối đa
+```
+
+---
+
+### 📁 Cấu trúc dự án
+
+```
+excel-image-inserter/
+├── ChenAnhHangLoat_VI.bas   ← Phiên bản tiếng Việt
+├── InsertImagesBulk_EN.bas  ← Phiên bản tiếng Anh
+├── README.md                ← Hướng dẫn này
+└── LICENSE                  ← Giấy phép MIT
+```
+
+---
+
+### ❓ Xử lý sự cố thường gặp
+
+| Vấn đề | Nguyên nhân | Giải pháp |
+|---|---|---|
+| Macro không chạy | Macro bị tắt | Vào File → Options → Trust Center → bật macro |
+| Không tìm thấy ảnh | Sai tên file hoặc sai thư mục | Kiểm tra tên file trong ô Excel khớp với tên file thực tế |
+| Lỗi HEIC/HEIF | Thiếu codec | Cài HEVC Video Extensions từ Microsoft Store |
+| SVG không hiện | Excel cũ | Cần Excel 2016+ |
+| File nặng bất thường | Quá nhiều ảnh lớn | Nén ảnh trước khi chèn, hoặc dùng JPG thay PNG |
+
+---
+
+### 📄 Giấy phép
+
+MIT License — miễn phí sử dụng, chỉnh sửa và chia sẻ. Xem [LICENSE](LICENSE) để biết thêm chi tiết.
