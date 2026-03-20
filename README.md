@@ -109,11 +109,22 @@ Your image files must be named accordingly: `1.png`, `2.jpg`, `3.heic`, etc.
 
 #### Changing the image column
 
-Open the VBA module and find:
+1. Press `Alt + F11` → open the Visual Basic Editor
+2. In the left panel, find your file under **VBAProject** → double-click the module (e.g. `Module1`)
+3. Find this line near the top of the code:
 ```vb
 Private Const COL_IMAGE As Integer = 3   ' Column C
 ```
-Change `3` to the desired column number (D = 4, E = 5, ...).
+4. Change `3` to the desired column number — for example `4` for column D, `5` for column E
+5. Press `Ctrl + S` to save
+
+| Column | Number |
+|---|---|
+| A | 1 |
+| B | 2 |
+| C | 3 |
+| D | 4 |
+| E | 5 |
 
 ---
 
@@ -264,11 +275,22 @@ File ảnh trong thư mục phải đặt tên tương ứng: `1.png`, `2.jpg`, 
 
 #### Cách thay đổi cột ảnh
 
-Mở module VBA, tìm dòng:
+1. Nhấn `Alt + F11` → mở Visual Basic Editor
+2. Ở panel bên trái, tìm file của bạn trong **VBAProject** → double-click vào module (ví dụ `Module1`)
+3. Tìm dòng này ở đầu code:
 ```vb
 Private Const COL_IMAGE As Integer = 3   ' Cột C
 ```
-Đổi `3` thành số cột khác (D = 4, E = 5, ...).
+4. Đổi `3` thành số cột mong muốn — ví dụ `4` cho cột D, `5` cho cột E
+5. Nhấn `Ctrl + S` để lưu
+
+| Cột | Số |
+|---|---|
+| A | 1 |
+| B | 2 |
+| C | 3 |
+| D | 4 |
+| E | 5 |
 
 ---
 
