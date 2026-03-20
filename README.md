@@ -45,7 +45,7 @@ Use cases: furniture quotations, product catalogs, inventory sheets, constructio
 | OS | Windows 10/11 |
 | Software | Microsoft Excel 2016 or later |
 | Macros | Must be **enabled** in Excel |
-| HEIC/HEIF | Install [HEVC codec](https://apps.microsoft.com/store/detail/hevc-video-extensions/9NMZLZ57R3T7) from Microsoft Store |
+| HEIC/HEIF | Install HEVC codec: [Microsoft Store](https://apps.microsoft.com/store/detail/hevc-video-extensions/9NMZLZ57R3T7) or [K-Lite Codec Pack](https://codecguide.com/media_foundation_codecs.htm) |
 
 ---
 
@@ -158,7 +158,7 @@ excel-image-inserter/
 |---|---|---|
 | Macro won't run | Macros disabled | File → Options → Trust Center → enable macros |
 | Image not found | Filename mismatch | Ensure cell value matches actual filename (without extension) |
-| HEIC/HEIF error | Missing codec | Install HEVC Video Extensions from Microsoft Store |
+| HEIC/HEIF error | Missing codec | Install [Microsoft Store](https://apps.microsoft.com/store/detail/hevc-video-extensions/9NMZLZ57R3T7) or [K-Lite Codec Pack](https://codecguide.com/media_foundation_codecs.htm) |
 | SVG not showing | Old Excel version | Requires Excel 2016 or later |
 | File size very large | Too many large images | Compress images first, or use JPG instead of PNG |
 
@@ -211,7 +211,7 @@ Phù hợp cho: báo giá nội thất, danh mục sản phẩm, bảng kiểm k
 | Hệ điều hành | Windows 10/11 |
 | Phần mềm | Microsoft Excel 2016 trở lên |
 | Macro | Phải **bật Macro** trong Excel |
-| HEIC/HEIF | Cần cài [HEVC codec](https://apps.microsoft.com/store/detail/hevc-video-extensions/9NMZLZ57R3T7) từ Microsoft Store |
+| HEIC/HEIF | Cài HEVC codec: [Microsoft Store](https://apps.microsoft.com/store/detail/hevc-video-extensions/9NMZLZ57R3T7) hoặc [K-Lite Codec Pack](https://codecguide.com/media_foundation_codecs.htm) |
 
 ---
 
@@ -324,7 +324,7 @@ excel-image-inserter/
 |---|---|---|
 | Macro không chạy | Macro bị tắt | Vào File → Options → Trust Center → bật macro |
 | Không tìm thấy ảnh | Sai tên file hoặc sai thư mục | Kiểm tra tên file trong ô Excel khớp với tên file thực tế |
-| Lỗi HEIC/HEIF | Thiếu codec | Cài HEVC Video Extensions từ Microsoft Store |
+| Lỗi HEIC/HEIF | Thiếu codec | Cài [Microsoft Store](https://apps.microsoft.com/store/detail/hevc-video-extensions/9NMZLZ57R3T7) hoặc [K-Lite Codec Pack](https://codecguide.com/media_foundation_codecs.htm) |
 | SVG không hiện | Excel cũ | Cần Excel 2016+ |
 | File nặng bất thường | Quá nhiều ảnh lớn | Nén ảnh trước khi chèn, hoặc dùng JPG thay PNG |
 
