@@ -58,6 +58,7 @@ Sub ChenAnhHangLoat()
         ".png", ".PNG", _
         ".jpg", ".JPG", _
         ".jpeg", ".JPEG", _
+        ".jfif", ".JFIF", _
         ".gif", ".GIF", _
         ".bmp", ".BMP", _
         ".tif", ".TIF", _

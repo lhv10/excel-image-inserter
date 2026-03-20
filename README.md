@@ -19,7 +19,7 @@ Use cases: furniture quotations, product catalogs, inventory sheets, constructio
 ### ✅ Features
 
 - Auto-inserts images based on filenames in column C (configurable)
-- Supports 14 formats: **PNG, JPG, JPEG, GIF, BMP, TIFF, WMF, EMF, WEBP, SVG, ICO, HEIC, HEIF**
+- Supports 15 formats: **PNG, JPG, JPEG, JFIF, GIF, BMP, TIFF, WMF, EMF, WEBP, SVG, ICO, HEIC, HEIF**
 - Smart image sizing: **preserves original aspect ratio**, centered in cell
 - **Folder picker dialog** — no hardcoded paths in code
 - Removes old images before inserting (prevents overlapping)
@@ -185,7 +185,7 @@ Phù hợp cho: báo giá nội thất, danh mục sản phẩm, bảng kiểm k
 ### ✅ Tính năng
 
 - Chèn ảnh tự động theo tên file trong cột C (có thể thay đổi)
-- Hỗ trợ 14 định dạng: **PNG, JPG, JPEG, GIF, BMP, TIFF, WMF, EMF, WEBP, SVG, ICO, HEIC, HEIF**
+- Hỗ trợ 15 định dạng: **PNG, JPG, JPEG, JFIF, GIF, BMP, TIFF, WMF, EMF, WEBP, SVG, ICO, HEIC, HEIF**
 - Tự động căn chỉnh ảnh: **giữ tỉ lệ gốc**, căn giữa trong ô
 - Hộp thoại **chọn thư mục** — không cần sửa đường dẫn trong code
 - Xóa ảnh cũ trước khi chèn (tránh chồng ảnh)
