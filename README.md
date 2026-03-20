@@ -79,15 +79,18 @@ A `.bas` file is a VBA (Visual Basic for Applications) source file — **it cann
 
 #### Step 1 — Prepare your Excel file
 
-Create column **C** with image filenames (no extension needed):
+Create column **C** with **numeric** image filenames (numbers only, no extension):
 
 | A | B | C |
 |---|---|---|
 | # | Product Name | **Image** |
-| 1 | Office Desk | `desk_001` |
-| 2 | Swivel Chair | `chair_02` |
+| 1 | Office Desk | `1` |
+| 2 | Swivel Chair | `2` |
+| 3 | Bookshelf | `3` |
 
-> **Note**: Filenames must not contain `/`, `\`, or `..`
+Your image files must be named accordingly: `1.png`, `2.jpg`, `3.heic`, etc.
+
+> **Note**: Column C must contain plain numbers only. Text values like `desk_001` will be skipped.
 
 #### Step 2 — Import the macro
 
@@ -231,15 +234,18 @@ File `.bas` là file mã nguồn VBA (Visual Basic for Applications) — **khôn
 
 #### Bước 1 — Chuẩn bị file Excel
 
-Tạo cột **C** chứa tên file ảnh (không cần đuôi file):
+Tạo cột **C** chứa **số thứ tự** tương ứng với tên file ảnh (chỉ ghi số, không cần đuôi file):
 
 | A | B | C |
 |---|---|---|
 | STT | Tên sản phẩm | **Ảnh** |
-| 1 | Bàn làm việc | `ban_lv_001` |
-| 2 | Ghế xoay | `ghe_xoay_02` |
+| 1 | Bàn làm việc | `1` |
+| 2 | Ghế xoay | `2` |
+| 3 | Kệ sách | `3` |
 
-> **Lưu ý**: Tên file không được chứa ký tự `/`, `\`, hay `..`
+File ảnh trong thư mục phải đặt tên tương ứng: `1.png`, `2.jpg`, `3.heic`...
+
+> **Lưu ý**: Cột C chỉ nhận giá trị số. Nếu ghi tên chữ như `ban_lv_001` sẽ bị bỏ qua.
 
 #### Bước 2 — Nhập macro vào Excel
 

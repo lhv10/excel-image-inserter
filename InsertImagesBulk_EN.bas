@@ -90,14 +90,8 @@ Sub InsertImagesBulk()
 
         imgName = Trim(CStr(ws.Cells(r, COL_IMAGE).Value))
 
-        ' Skip empty cells
-        If imgName = "" Then GoTo NextRow
-
-        ' SECURITY: Block path traversal attempts (no / \ or .. in filename)
-        If InStr(imgName, "/") > 0 Or InStr(imgName, "\") > 0 Or InStr(imgName, "..") > 0 Then
-            notFound = notFound & "  - Row " & r & ": """ & imgName & """ - invalid filename characters" & vbNewLine
-            GoTo NextRow
-        End If
+        ' Skip empty cells or non-numeric values
+        If imgName = "" Or imgName = "0" Or Not IsNumeric(imgName) Then GoTo NextRow
 
         ' Search for image file with all supported extensions
         imgPath = ""

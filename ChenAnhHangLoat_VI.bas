@@ -90,14 +90,8 @@ Sub ChenAnhHangLoat()
 
         imgName = Trim(CStr(ws.Cells(r, COL_IMAGE).Value))
 
-        ' Bo qua o trong
-        If imgName = "" Then GoTo NextRow
-
-        ' BAO MAT: Ngan chan path traversal (ten file khong duoc chua / \ hoac ..)
-        If InStr(imgName, "/") > 0 Or InStr(imgName, "\") > 0 Or InStr(imgName, "..") > 0 Then
-            notFound = notFound & "  - Hang " & r & ": """ & imgName & """ - ten file khong hop le" & vbNewLine
-            GoTo NextRow
-        End If
+        ' Bo qua o trong hoac gia tri khong phai so
+        If imgName = "" Or imgName = "0" Or Not IsNumeric(imgName) Then GoTo NextRow
 
         ' Tim file anh voi tung dinh dang
         imgPath = ""
