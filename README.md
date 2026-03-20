@@ -49,6 +49,32 @@ Phù hợp cho: báo giá nội thất, danh mục sản phẩm, bảng kiểm k
 
 ---
 
+### 📂 File `.bas` là gì? Mở bằng cách nào?
+
+File `.bas` là file mã nguồn VBA (Visual Basic for Applications) — **không chạy trực tiếp được**, phải import vào Excel trước.
+
+#### Cách import vào Excel:
+
+**Cách 1 — Import file (nhanh nhất):**
+1. Mở file Excel của bạn
+2. Nhấn `Alt + F11` → mở Visual Basic Editor
+3. Vào menu **File → Import File...**
+4. Chọn file `.bas` vừa tải về → nhấn **Open**
+5. Lưu file Excel dưới dạng **`.xlsm`** (Excel Macro-Enabled Workbook)
+
+**Cách 2 — Copy thủ công:**
+1. Mở file `.bas` bằng **Notepad** (click phải → Open with → Notepad)
+2. Nhấn `Ctrl + A` → `Ctrl + C` để copy toàn bộ
+3. Mở Excel → nhấn `Alt + F11`
+4. Vào menu **Insert → Module**
+5. Dán code vào (`Ctrl + V`)
+6. Lưu file Excel dưới dạng **`.xlsm`**
+
+> **Tại sao dùng `.bas` thay vì `.xlsm`?**
+> File `.bas` chỉ chứa code thuần — nhẹ hơn, minh bạch hơn, dễ xem trên GitHub, và không bị phần mềm diệt virus cảnh báo như file `.xlsm`.
+
+---
+
 ### 🚀 Cách sử dụng
 
 #### Bước 1 — Chuẩn bị file Excel
@@ -166,6 +192,32 @@ Use cases: furniture quotations, product catalogs, inventory sheets, constructio
 | Software | Microsoft Excel 2016 or later |
 | Macros | Must be **enabled** in Excel |
 | HEIC/HEIF | Install [HEVC codec](https://apps.microsoft.com/store/detail/hevc-video-extensions/9NMZLZ57R3T7) from Microsoft Store |
+
+---
+
+### 📂 What is a `.bas` file? How do I open it?
+
+A `.bas` file is a VBA (Visual Basic for Applications) source file — **it cannot be run directly**, it must be imported into Excel first.
+
+#### How to import into Excel:
+
+**Option 1 — Import file (fastest):**
+1. Open your Excel file
+2. Press `Alt + F11` → open the Visual Basic Editor
+3. Go to **File → Import File...**
+4. Select the downloaded `.bas` file → click **Open**
+5. Save your Excel file as **`.xlsm`** (Excel Macro-Enabled Workbook)
+
+**Option 2 — Copy manually:**
+1. Open the `.bas` file with **Notepad** (right-click → Open with → Notepad)
+2. Press `Ctrl + A` → `Ctrl + C` to copy everything
+3. Open Excel → press `Alt + F11`
+4. Go to **Insert → Module**
+5. Paste the code (`Ctrl + V`)
+6. Save your Excel file as **`.xlsm`**
+
+> **Why `.bas` instead of `.xlsm`?**
+> A `.bas` file contains only plain source code — smaller, transparent, easy to review on GitHub, and won't trigger antivirus warnings like `.xlsm` files sometimes do.
 
 ---
 
