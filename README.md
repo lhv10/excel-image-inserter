@@ -1,0 +1,253 @@
+# 📸 Excel Bulk Image Inserter / Chèn Ảnh Hàng Loạt vào Excel
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Platform: Windows](https://img.shields.io/badge/Platform-Windows-blue.svg)]()
+[![Excel: 2016+](https://img.shields.io/badge/Excel-2016%2B-green.svg)]()
+
+---
+
+## 🇻🇳 Tiếng Việt
+
+### Giới thiệu
+
+Macro VBA giúp bạn **chèn hàng loạt ảnh vào Excel** một cách tự động: đọc tên file từ một cột, tìm ảnh trong thư mục bạn chọn, rồi căn chỉnh ảnh gọn gàng vào từng ô — đúng tỉ lệ, căn giữa, không bị méo.
+
+Phù hợp cho: báo giá nội thất, danh mục sản phẩm, bảng kiểm kê hàng hóa, hồ sơ dự án xây dựng...
+
+---
+
+### ✅ Tính năng
+
+- Chèn ảnh tự động theo tên file trong cột C (có thể thay đổi)
+- Hỗ trợ 14 định dạng: **PNG, JPG, JPEG, GIF, BMP, TIFF, WMF, EMF, WEBP, SVG, ICO, HEIC, HEIF**
+- Tự động căn chỉnh ảnh: **giữ tỉ lệ gốc**, căn giữa trong ô
+- Hộp thoại **chọn thư mục** — không cần sửa đường dẫn trong code
+- Xóa ảnh cũ trước khi chèn (tránh chồng ảnh)
+- Báo cáo các file không tìm thấy sau khi chạy xong
+- Giới hạn an toàn: tối đa 500 ảnh/lần chạy
+- Macro xóa ảnh hàng loạt kèm xác nhận
+
+---
+
+### 🛡️ Bảo mật
+
+- **Chống path traversal**: tên file chứa `../`, `/`, `\` sẽ bị từ chối
+- Ảnh được **nhúng trực tiếp** vào file (không link ngoài) → an toàn khi gửi khách
+- Không ghi dữ liệu ra ngoài thư mục được chọn
+- Không dùng `Shell`, `WScript`, hay bất kỳ lệnh hệ thống nào
+
+---
+
+### 📋 Yêu cầu
+
+| Yêu cầu | Chi tiết |
+|---|---|
+| Hệ điều hành | Windows 10/11 |
+| Phần mềm | Microsoft Excel 2016 trở lên |
+| Macro | Phải **bật Macro** trong Excel |
+| HEIC/HEIF | Cần cài [HEVC codec](https://apps.microsoft.com/store/detail/hevc-video-extensions/9NMZLZ57R3T7) từ Microsoft Store |
+
+---
+
+### 🚀 Cách sử dụng
+
+#### Bước 1 — Chuẩn bị file Excel
+
+Tạo cột **C** chứa tên file ảnh (không cần đuôi file):
+
+| A | B | C |
+|---|---|---|
+| STT | Tên sản phẩm | **Ảnh** |
+| 1 | Bàn làm việc | `ban_lv_001` |
+| 2 | Ghế xoay | `ghe_xoay_02` |
+
+> **Lưu ý**: Tên file không được chứa ký tự `/`, `\`, hay `..`
+
+#### Bước 2 — Nhập macro vào Excel
+
+1. Mở file Excel
+2. Nhấn `Alt + F11` → mở Visual Basic Editor
+3. Vào menu **Insert → Module**
+4. Dán toàn bộ nội dung file `.bas` vào
+5. Nhấn `Ctrl + S` → lưu dưới dạng **xlsm** (Excel Macro-Enabled Workbook)
+
+#### Bước 3 — Chạy macro
+
+1. Nhấn `Alt + F8`
+2. Chọn `ChenAnhHangLoat` → nhấn **Run**
+3. Hộp thoại xuất hiện → chọn thư mục chứa ảnh
+4. Chờ macro chạy xong → xem thông báo kết quả
+
+#### Cách thay đổi cột ảnh
+
+Mở module VBA, tìm dòng:
+```vb
+Private Const COL_IMAGE As Integer = 3   ' Cột C
+```
+Đổi `3` thành số cột khác (D = 4, E = 5, ...).
+
+---
+
+### ⚙️ Cấu hình nâng cao
+
+```vb
+Private Const COL_IMAGE     As Integer = 3    ' Cột chứa tên file ảnh
+Private Const START_ROW     As Long    = 2    ' Hàng bắt đầu (bỏ qua header)
+Private Const ROW_HEIGHT_PX As Double  = 80   ' Chiều cao hàng (points)
+Private Const IMG_PADDING   As Double  = 8    ' Khoảng trắng xung quanh ảnh
+Private Const MAX_SHAPES    As Long    = 500  ' Giới hạn số ảnh tối đa
+```
+
+---
+
+### 📁 Cấu trúc dự án
+
+```
+excel-image-inserter/
+├── ChenAnhHangLoat_VI.bas   ← Phiên bản tiếng Việt
+├── InsertImagesBulk_EN.bas  ← Phiên bản tiếng Anh
+├── README.md                ← Hướng dẫn này
+└── LICENSE                  ← Giấy phép MIT
+```
+
+---
+
+### ❓ Xử lý sự cố thường gặp
+
+| Vấn đề | Nguyên nhân | Giải pháp |
+|---|---|---|
+| Macro không chạy | Macro bị tắt | Vào File → Options → Trust Center → bật macro |
+| Không tìm thấy ảnh | Sai tên file hoặc sai thư mục | Kiểm tra tên file trong ô Excel khớp với tên file thực tế |
+| Lỗi HEIC/HEIF | Thiếu codec | Cài HEVC Video Extensions từ Microsoft Store |
+| SVG không hiện | Excel cũ | Cần Excel 2016+ |
+| File nặng bất thường | Quá nhiều ảnh lớn | Nén ảnh trước khi chèn, hoặc dùng JPG thay PNG |
+
+---
+
+---
+
+## 🇬🇧 English
+
+### Overview
+
+A VBA macro that **automatically inserts images in bulk into Excel**: reads filenames from a column, searches for images in a folder you select, then places each image neatly inside its cell — maintaining aspect ratio, centered, no distortion.
+
+Use cases: furniture quotations, product catalogs, inventory sheets, construction project files...
+
+---
+
+### ✅ Features
+
+- Auto-inserts images based on filenames in column C (configurable)
+- Supports 14 formats: **PNG, JPG, JPEG, GIF, BMP, TIFF, WMF, EMF, WEBP, SVG, ICO, HEIC, HEIF**
+- Smart image sizing: **preserves original aspect ratio**, centered in cell
+- **Folder picker dialog** — no hardcoded paths in code
+- Removes old images before inserting (prevents overlapping)
+- Reports missing files after completion
+- Safety limit: max 500 images per run
+- Bulk delete macro with confirmation dialog
+
+---
+
+### 🛡️ Security
+
+- **Path traversal protection**: filenames containing `../`, `/`, or `\` are rejected
+- Images are **embedded** into the workbook (not linked externally) → safe to share
+- No data written outside the selected folder
+- No use of `Shell`, `WScript`, or any system commands
+
+---
+
+### 📋 Requirements
+
+| Requirement | Details |
+|---|---|
+| OS | Windows 10/11 |
+| Software | Microsoft Excel 2016 or later |
+| Macros | Must be **enabled** in Excel |
+| HEIC/HEIF | Install [HEVC codec](https://apps.microsoft.com/store/detail/hevc-video-extensions/9NMZLZ57R3T7) from Microsoft Store |
+
+---
+
+### 🚀 How to Use
+
+#### Step 1 — Prepare your Excel file
+
+Create column **C** with image filenames (no extension needed):
+
+| A | B | C |
+|---|---|---|
+| # | Product Name | **Image** |
+| 1 | Office Desk | `desk_001` |
+| 2 | Swivel Chair | `chair_02` |
+
+> **Note**: Filenames must not contain `/`, `\`, or `..`
+
+#### Step 2 — Import the macro
+
+1. Open your Excel file
+2. Press `Alt + F11` → open the Visual Basic Editor
+3. Go to **Insert → Module**
+4. Paste the entire content of the `.bas` file
+5. Press `Ctrl + S` → save as **xlsm** (Excel Macro-Enabled Workbook)
+
+#### Step 3 — Run the macro
+
+1. Press `Alt + F8`
+2. Select `InsertImagesBulk` → click **Run**
+3. A folder picker dialog will appear → select the folder containing your images
+4. Wait for completion → review the summary message
+
+#### Changing the image column
+
+Open the VBA module and find:
+```vb
+Private Const COL_IMAGE As Integer = 3   ' Column C
+```
+Change `3` to the desired column number (D = 4, E = 5, ...).
+
+---
+
+### ⚙️ Advanced Configuration
+
+```vb
+Private Const COL_IMAGE     As Integer = 3    ' Column with image filenames
+Private Const START_ROW     As Long    = 2    ' First data row (skips header)
+Private Const ROW_HEIGHT_PX As Double  = 80   ' Row height in points
+Private Const IMG_PADDING   As Double  = 8    ' Padding around image in cell
+Private Const MAX_SHAPES    As Long    = 500  ' Maximum images per run
+```
+
+---
+
+### 📁 Project Structure
+
+```
+excel-image-inserter/
+├── ChenAnhHangLoat_VI.bas   ← Vietnamese version
+├── InsertImagesBulk_EN.bas  ← English version
+├── README.md                ← This file
+└── LICENSE                  ← MIT License
+```
+
+---
+
+### ❓ Troubleshooting
+
+| Issue | Cause | Fix |
+|---|---|---|
+| Macro won't run | Macros disabled | File → Options → Trust Center → enable macros |
+| Image not found | Filename mismatch | Ensure cell value matches actual filename (without extension) |
+| HEIC/HEIF error | Missing codec | Install HEVC Video Extensions from Microsoft Store |
+| SVG not showing | Old Excel version | Requires Excel 2016 or later |
+| File size very large | Too many large images | Compress images first, or use JPG instead of PNG |
+
+---
+
+### 📄 License
+
+MIT License — free to use, modify, and share. See [LICENSE](LICENSE) for details.
+
+---
+
+*Made with ❤️ for the Vietnamese construction & furniture industry*
