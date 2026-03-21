@@ -13,6 +13,8 @@ jobs:
   scan:
     name: Scan .bas files
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout
@@ -28,6 +30,7 @@ jobs:
           vt_api_key: ${{ secrets.VIRUSTOTAL_API_KEY }}
           files: ChenAnhHangLoat_VI.bas
           allow_reanalysis: true
+          update_release_body: true
 
       - name: Scan InsertImagesBulk_EN.bas
         uses: crazy-max/ghaction-virustotal@v4
@@ -37,3 +40,4 @@ jobs:
           vt_api_key: ${{ secrets.VIRUSTOTAL_API_KEY }}
           files: InsertImagesBulk_EN.bas
           allow_reanalysis: true
+          update_release_body: true
