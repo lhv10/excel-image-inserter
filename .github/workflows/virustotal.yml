@@ -17,15 +17,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        env:
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
       - name: Scan ChenAnhHangLoat_VI.bas
         uses: crazy-max/ghaction-virustotal@v4
+        env:
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
         with:
           vt_api_key: ${{ secrets.VIRUSTOTAL_API_KEY }}
           files: ChenAnhHangLoat_VI.bas
 
       - name: Scan InsertImagesBulk_EN.bas
         uses: crazy-max/ghaction-virustotal@v4
+        env:
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
         with:
           vt_api_key: ${{ secrets.VIRUSTOTAL_API_KEY }}
           files: InsertImagesBulk_EN.bas
