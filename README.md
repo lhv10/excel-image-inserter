@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Platform: Windows](https://img.shields.io/badge/Platform-Windows-blue.svg)]()
-[![Excel: 2010+](https://img.shields.io/badge/Excel-2010%2B-green.svg)]()
+[![Excel: 2016+](https://img.shields.io/badge/Excel-2016%2B-green.svg)]()
 [![VirusTotal Scan](https://github.com/lhv10/excel-vba-image-bulk-insert/actions/workflows/virustotal.yml/badge.svg)](https://github.com/lhv10/excel-vba-image-bulk-insert/actions/workflows/virustotal.yml)
 
 ---
@@ -44,7 +44,7 @@ Use cases: furniture quotations, product catalogs, inventory sheets, constructio
 | Requirement | Details |
 |---|---|
 | OS | Windows 10/11 |
-| Software | Microsoft Excel 2010 or later (Excel 2016+ recommended for full format support) |
+| Software | Microsoft Excel 2016 or later |
 | Macros | Must be **enabled** in Excel |
 
 ---
@@ -169,11 +169,9 @@ excel-vba-image-bulk-insert/
 | Issue | Cause | Fix |
 |---|---|---|
 | Macro won't run | Macros disabled | Click **Enable Content** on the yellow bar when opening the file. If no bar appears: File → Options → Trust Center → Macro Settings → Enable all macros |
-| Windows 7 | Limited support | Works with Excel 2013+ only. PNG, JPG, BMP, GIF, TIFF, WMF, EMF are supported. WEBP, SVG, HEIC, HEIF, JFIF **not supported** (missing codecs) |
 | Image not found | Filename mismatch | Ensure cell value matches actual filename (without extension) |
 | HEIC/HEIF error | Missing codec | Install [Microsoft Store](https://apps.microsoft.com/store/detail/hevc-video-extensions/9NMZLZ57R3T7) or [K-Lite Codec Pack](https://codecguide.com/media_foundation_codecs.htm) |
 | SVG not showing | Old Excel version | SVG requires Excel 2016+, WEBP requires Excel 2019+ or Microsoft 365 |
-| File size very large | Too many large images | Compress images first, or use JPG instead of PNG |
 
 ---
 
@@ -222,7 +220,7 @@ Phù hợp cho: báo giá nội thất, danh mục sản phẩm, bảng kiểm k
 | Yêu cầu | Chi tiết |
 |---|---|
 | Hệ điều hành | Windows 10/11 |
-| Phần mềm | Microsoft Excel 2010 trở lên (Excel 2016+ để dùng đầy đủ định dạng) |
+| Phần mềm | Microsoft Excel 2016 trở lên |
 | Macro | Phải **bật Macro** trong Excel |
 
 ---
@@ -347,11 +345,9 @@ excel-vba-image-bulk-insert/
 | Vấn đề | Nguyên nhân | Giải pháp |
 |---|---|---|
 | Macro không chạy | Macro bị tắt | Nhấn **Enable Content** trên thanh vàng khi mở file. Nếu không thấy thanh vàng: File → Options → Trust Center → Macro Settings → Enable all macros |
-| Windows 7 | Hỗ trợ giới hạn | Cần Excel 2013 trở lên. PNG, JPG, BMP, GIF, TIFF, WMF, EMF dùng được bình thường. WEBP, SVG, HEIC, HEIF, JFIF **không hỗ trợ** do thiếu codec |
 | Không tìm thấy ảnh | Sai tên file hoặc sai thư mục | Kiểm tra tên file trong ô Excel khớp với tên file thực tế |
 | Lỗi HEIC/HEIF | Thiếu codec | Cài [Microsoft Store](https://apps.microsoft.com/store/detail/hevc-video-extensions/9NMZLZ57R3T7) hoặc [K-Lite Codec Pack](https://codecguide.com/media_foundation_codecs.htm) |
 | SVG không hiện | Excel cũ | SVG cần Excel 2016+, WEBP cần Excel 2019+ hoặc Microsoft 365 |
-| File nặng bất thường | Quá nhiều ảnh lớn | Nén ảnh trước khi chèn, hoặc dùng JPG thay PNG |
 
 ---
 

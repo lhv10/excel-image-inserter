@@ -29,7 +29,6 @@ jobs:
         with:
           vt_api_key: ${{ secrets.VIRUSTOTAL_API_KEY }}
           files: ChenAnhHangLoat_VI.bas
-          allow_reanalysis: true
           update_release_body: true
 
       - name: Scan InsertImagesBulk_EN.bas
@@ -39,5 +38,4 @@ jobs:
         with:
           vt_api_key: ${{ secrets.VIRUSTOTAL_API_KEY }}
           files: InsertImagesBulk_EN.bas
-          allow_reanalysis: true
           update_release_body: true
