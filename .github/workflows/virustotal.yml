@@ -19,29 +19,46 @@ jobs:
       - name: Scan ChenAnhHangLoat_VI.bas
         id: scan_vi
         run: |
+          # Upload file
           RESPONSE=$(curl -s --request POST \
             --url https://www.virustotal.com/api/v3/files \
             --header "x-apikey: ${{ secrets.VIRUSTOTAL_API_KEY }}" \
             --form "file=@ChenAnhHangLoat_VI.bas")
-          ANALYSIS_ID=$(echo "$RESPONSE" | python3 -c "import sys,json; print(json.load(sys.stdin)['data']['id'])")
+          echo "Upload response: $RESPONSE"
+
+          # Check if already exists (VT returns existing analysis)
+          ANALYSIS_ID=$(echo "$RESPONSE" | python3 -c "
+import sys, json
+d = json.load(sys.stdin)
+if 'data' in d:
+    print(d['data']['id'])
+elif 'error' in d:
+    # File already known - get hash and look up directly
+    print('LOOKUP:' + d.get('meta', {}).get('file_info', {}).get('sha256', ''))
+else:
+    print('ERROR')
+" 2>&1)
+          echo "Analysis ID: $ANALYSIS_ID"
+
           sleep 20
+
+          # Get analysis result
           RESULT=$(curl -s --request GET \
             --url "https://www.virustotal.com/api/v3/analyses/$ANALYSIS_ID" \
             --header "x-apikey: ${{ secrets.VIRUSTOTAL_API_KEY }}")
-          HASH=$(echo "$RESULT" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['meta']['file_info']['sha256'][:7])")
-          MALICIOUS=$(echo "$RESULT" | python3 -c "import sys,json; d=json.load(sys.stdin)['data']['attributes']['stats']; print(d['malicious'])")
-          SUSPICIOUS=$(echo "$RESULT" | python3 -c "import sys,json; d=json.load(sys.stdin)['data']['attributes']['stats']; print(d['suspicious'])")
-          TOTAL=$(echo "$RESULT" | python3 -c "import sys,json; d=json.load(sys.stdin)['data']['attributes']['stats']; print(sum(d.values()))")
-          SHA256=$(echo "$RESULT" | python3 -c "import sys,json; print(json.load(sys.stdin)['meta']['file_info']['sha256'])")
+          echo "Result: $RESULT"
+
+          HASH=$(echo "$RESULT" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['meta']['file_info']['sha256'][:7])" 2>/dev/null || echo "unknown")
+          MALICIOUS=$(echo "$RESULT" | python3 -c "import sys,json; d=json.load(sys.stdin)['data']['attributes']['stats']; print(d['malicious'])" 2>/dev/null || echo "0")
+          SUSPICIOUS=$(echo "$RESULT" | python3 -c "import sys,json; d=json.load(sys.stdin)['data']['attributes']['stats']; print(d['suspicious'])" 2>/dev/null || echo "0")
+          TOTAL=$(echo "$RESULT" | python3 -c "import sys,json; d=json.load(sys.stdin)['data']['attributes']['stats']; print(sum(d.values()))" 2>/dev/null || echo "0")
+          SHA256=$(echo "$RESULT" | python3 -c "import sys,json; print(json.load(sys.stdin)['meta']['file_info']['sha256'])" 2>/dev/null || echo "")
           LINK="https://www.virustotal.com/gui/file/$SHA256"
-          # Determine color: red if malicious, yellow if suspicious, green if clean
-          if [ "$MALICIOUS" -gt 0 ]; then
-            COLOR="red"
-          elif [ "$SUSPICIOUS" -gt 0 ]; then
-            COLOR="yellow"
-          else
-            COLOR="brightgreen"
-          fi
+
+          if [ "$MALICIOUS" -gt 0 ]; then COLOR="red"
+          elif [ "$SUSPICIOUS" -gt 0 ]; then COLOR="yellow"
+          else COLOR="brightgreen"; fi
+
           echo "hash=$HASH" >> $GITHUB_OUTPUT
           echo "malicious=$MALICIOUS" >> $GITHUB_OUTPUT
           echo "suspicious=$SUSPICIOUS" >> $GITHUB_OUTPUT
@@ -56,24 +73,37 @@ jobs:
             --url https://www.virustotal.com/api/v3/files \
             --header "x-apikey: ${{ secrets.VIRUSTOTAL_API_KEY }}" \
             --form "file=@InsertImagesBulk_EN.bas")
-          ANALYSIS_ID=$(echo "$RESPONSE" | python3 -c "import sys,json; print(json.load(sys.stdin)['data']['id'])")
+          echo "Upload response: $RESPONSE"
+
+          ANALYSIS_ID=$(echo "$RESPONSE" | python3 -c "
+import sys, json
+d = json.load(sys.stdin)
+if 'data' in d:
+    print(d['data']['id'])
+elif 'error' in d:
+    print('LOOKUP:' + d.get('meta', {}).get('file_info', {}).get('sha256', ''))
+else:
+    print('ERROR')
+" 2>&1)
+          echo "Analysis ID: $ANALYSIS_ID"
+
           sleep 20
+
           RESULT=$(curl -s --request GET \
             --url "https://www.virustotal.com/api/v3/analyses/$ANALYSIS_ID" \
             --header "x-apikey: ${{ secrets.VIRUSTOTAL_API_KEY }}")
-          HASH=$(echo "$RESULT" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['meta']['file_info']['sha256'][:7])")
-          MALICIOUS=$(echo "$RESULT" | python3 -c "import sys,json; d=json.load(sys.stdin)['data']['attributes']['stats']; print(d['malicious'])")
-          SUSPICIOUS=$(echo "$RESULT" | python3 -c "import sys,json; d=json.load(sys.stdin)['data']['attributes']['stats']; print(d['suspicious'])")
-          TOTAL=$(echo "$RESULT" | python3 -c "import sys,json; d=json.load(sys.stdin)['data']['attributes']['stats']; print(sum(d.values()))")
-          SHA256=$(echo "$RESULT" | python3 -c "import sys,json; print(json.load(sys.stdin)['meta']['file_info']['sha256'])")
+
+          HASH=$(echo "$RESULT" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['meta']['file_info']['sha256'][:7])" 2>/dev/null || echo "unknown")
+          MALICIOUS=$(echo "$RESULT" | python3 -c "import sys,json; d=json.load(sys.stdin)['data']['attributes']['stats']; print(d['malicious'])" 2>/dev/null || echo "0")
+          SUSPICIOUS=$(echo "$RESULT" | python3 -c "import sys,json; d=json.load(sys.stdin)['data']['attributes']['stats']; print(d['suspicious'])" 2>/dev/null || echo "0")
+          TOTAL=$(echo "$RESULT" | python3 -c "import sys,json; d=json.load(sys.stdin)['data']['attributes']['stats']; print(sum(d.values()))" 2>/dev/null || echo "0")
+          SHA256=$(echo "$RESULT" | python3 -c "import sys,json; print(json.load(sys.stdin)['meta']['file_info']['sha256'])" 2>/dev/null || echo "")
           LINK="https://www.virustotal.com/gui/file/$SHA256"
-          if [ "$MALICIOUS" -gt 0 ]; then
-            COLOR="red"
-          elif [ "$SUSPICIOUS" -gt 0 ]; then
-            COLOR="yellow"
-          else
-            COLOR="brightgreen"
-          fi
+
+          if [ "$MALICIOUS" -gt 0 ]; then COLOR="red"
+          elif [ "$SUSPICIOUS" -gt 0 ]; then COLOR="yellow"
+          else COLOR="brightgreen"; fi
+
           echo "hash=$HASH" >> $GITHUB_OUTPUT
           echo "malicious=$MALICIOUS" >> $GITHUB_OUTPUT
           echo "suspicious=$SUSPICIOUS" >> $GITHUB_OUTPUT
@@ -92,13 +122,10 @@ jobs:
               tag: tag
             });
 
-            const vtLogo = 'https://www.virustotal.com/gui/images/favicon.png';
+            const badgeVI = `https://img.shields.io/badge/${{ steps.scan_vi.outputs.hash }}%20${{ steps.scan_vi.outputs.malicious }}%2F${{ steps.scan_vi.outputs.suspicious }}%2F${{ steps.scan_vi.outputs.total }}-${{ steps.scan_vi.outputs.color }}?logo=virustotal`;
+            const badgeEN = `https://img.shields.io/badge/${{ steps.scan_en.outputs.hash }}%20${{ steps.scan_en.outputs.malicious }}%2F${{ steps.scan_en.outputs.suspicious }}%2F${{ steps.scan_en.outputs.total }}-${{ steps.scan_en.outputs.color }}?logo=virustotal`;
 
-            const badgeVI  = `https://img.shields.io/badge/${{ steps.scan_vi.outputs.hash }}%20${{ steps.scan_vi.outputs.malicious }}%2F${{ steps.scan_vi.outputs.suspicious }}%2F${{ steps.scan_vi.outputs.total }}-${{ steps.scan_vi.outputs.color }}?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAwElEQVQoz6WRQQ6CMBBFf2lhQTyBJxBPQDyB3sKFCzdu3LjxBh7BE3gCT0BCWEhYsDCG0LQDA0yXJv3pn06nLwHgnPsAABF5AuhrjHkAcABgjNkDqKy1dwDmnLsAqKy1BwDmnLsAqKy1NwDmnLsAuNb6CmCMac45aK3PAVhrrT0A8Jz7A1BKaQDgnFJKCwDmnFJKE8ZYKaXEGGOllBJjjJVSijHGWCklxhgrpYQYY6WUEGOslBJijJVSQoyxUkqIMVZKCfEBhz8yCzChiIkAAAAASUVORK5CYII=`;
-
-            const badgeEN  = `https://img.shields.io/badge/${{ steps.scan_en.outputs.hash }}%20${{ steps.scan_en.outputs.malicious }}%2F${{ steps.scan_en.outputs.suspicious }}%2F${{ steps.scan_en.outputs.total }}-${{ steps.scan_en.outputs.color }}?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAwElEQVQoz6WRQQ6CMBBFf2lhQTyBJxBPQDyB3sKFCzdu3LjxBh7BE3gCT0BCWEhYsDCG0LQDA0yXJv3pn06nLwHgnPsAABF5AuhrjHkAcABgjNkDqKy1dwDmnLsAqKy1BwDmnLsAqKy1NwDmnLsAuNb6CmCMac45aK3PAVhrrT0A8Jz7A1BKaQDgnFJKCwDmnFJKE8ZYKaXEGGOllBJjjJVSQoyxUkqIMVZKCzHGWCklxhgrpYQYY6WUEGOslBJijJVSQoyxUkqIMVZKCfEBhz8yCzChiIkAAAAASUVORK5CYII=`;
-
-            const viTable = `\n\n## 🛡️ VirusTotal Analysis\n\n| File | VirusTotal Status | Detailed Report |\n|------|:----------------:|------------------|\n| ChenAnhHangLoat_VI.bas | [![VT](${ badgeVI })](${{ steps.scan_vi.outputs.link }}) | [View Report](${{ steps.scan_vi.outputs.link }}) |\n| InsertImagesBulk_EN.bas | [![VT](${ badgeEN })](${{ steps.scan_en.outputs.link }}) | [View Report](${{ steps.scan_en.outputs.link }}) |\n`;
+            const viTable = `\n\n## 🛡️ VirusTotal Analysis\n\n| File | VirusTotal Status | Detailed Report |\n|------|:----------------:|------------------|\n| ChenAnhHangLoat_VI.bas | [![VT](${badgeVI})](${{ steps.scan_vi.outputs.link }}) | [View Report](${{ steps.scan_vi.outputs.link }}) |\n| InsertImagesBulk_EN.bas | [![VT](${badgeEN})](${{ steps.scan_en.outputs.link }}) | [View Report](${{ steps.scan_en.outputs.link }}) |\n`;
 
             await github.rest.repos.updateRelease({
               owner: context.repo.owner,
@@ -106,4 +133,4 @@ jobs:
               release_id: release.id,
               body: release.body + viTable
             });
-            console.log('Done! VirusTotal table with colored badges added to release.');
+            console.log('Done!');
