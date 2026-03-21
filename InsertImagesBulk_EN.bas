@@ -1,6 +1,6 @@
 ' ============================================================
 ' BULK IMAGE INSERTER FOR EXCEL - ENGLISH VERSION
-' Supported formats: PNG, JPG, JPEG, GIF, BMP, TIFF, WMF, EMF, WEBP, SVG, ICO, HEIC
+' Supported formats: PNG, JPG, JPEG, JFIF, GIF, BMP, TIFF, WMF, EMF, WEBP, SVG, ICO, HEIC, HEIF
 ' Version: 1.1 - Security reviewed and bug-fixed
 ' ============================================================
 

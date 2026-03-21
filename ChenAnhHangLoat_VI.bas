@@ -1,6 +1,6 @@
 ' ============================================================
 ' CHEN ANH HANG LOAT VAO EXCEL - PHIEN BAN TIENG VIET
-' Ho tro: PNG, JPG, JPEG, GIF, BMP, TIFF, WMF, EMF, WEBP, SVG, ICO, HEIC
+' Ho tro: PNG, JPG, JPEG, JFIF, GIF, BMP, TIFF, WMF, EMF, WEBP, SVG, ICO, HEIC, HEIF
 ' Phien ban: 1.1 - Da kiem tra bao mat va sua loi
 ' ============================================================
 
