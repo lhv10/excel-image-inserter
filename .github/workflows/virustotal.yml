@@ -1,0 +1,31 @@
+name: VirusTotal Scan
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '**.bas'
+  release:
+    types: [ published ]
+  workflow_dispatch:
+
+jobs:
+  scan:
+    name: Scan .bas files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Scan ChenAnhHangLoat_VI.bas
+        uses: crazy-max/ghaction-virustotal@v4
+        with:
+          vt_api_key: ${{ secrets.VIRUSTOTAL_API_KEY }}
+          files: ChenAnhHangLoat_VI.bas
+
+      - name: Scan InsertImagesBulk_EN.bas
+        uses: crazy-max/ghaction-virustotal@v4
+        with:
+          vt_api_key: ${{ secrets.VIRUSTOTAL_API_KEY }}
+          files: InsertImagesBulk_EN.bas
