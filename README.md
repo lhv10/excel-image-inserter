@@ -1,8 +1,6 @@
 # 📸 Excel Bulk Image Inserter / Chèn Ảnh Hàng Loạt vào Excel
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Platform: Windows](https://img.shields.io/badge/Platform-Windows-blue.svg)]()
-[![Excel: 2016+](https://img.shields.io/badge/Excel-2016%2B-green.svg)]()
 [![VirusTotal Scan](https://github.com/lhv10/excel-vba-image-bulk-insert/actions/workflows/virustotal.yml/badge.svg)](https://github.com/lhv10/excel-vba-image-bulk-insert/actions/workflows/virustotal.yml)
 
 ---
